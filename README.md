@@ -25,9 +25,7 @@ The main requirements area to have a package manager, a bundler and compiler. Fo
 - [Webpack](https://webpack.js.org/)
 - [Babel](https://babeljs.io/)
 
-```html
-#### <span style="color:skyblue">Package Manager</span>
-```
+#### [Package Manager](#)
 
 The React documentation states that the npm version must be 5.6 or above. I chose npm since I already have the latest stable version installed.
 
