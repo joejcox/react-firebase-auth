@@ -192,7 +192,7 @@ So it looks like I've changed the path and webpack variables in the webpack conf
    object { allowedHosts?, bonjour?, client?, compress?, devMiddleware?, headers?, historyApiFallback?, host?, hot?, http2?, https?, ipc?, liveReload?, magicHtml?, onAfterSetupMiddleware?, onBeforeSetupMiddleware?, onListening?, open?, port?, proxy?, server?, setupExitSignals?, static?, watchFiles?, webSocketServer? }
 ```
 
-Okay so upon investigation this, it seems that the latest version of Webpack (5) does not support the property `hotOnly` within the config under the object within `devServer`. I have updated this to `hot: "only"` which should work according to stack overflow.
+Okay so upon investigation this, it seems that the latest version of Webpack (5) does not support the property `hotOnly` within the config under the `devServer` property. I have updated this to `hot: "only"` which should work according to stack overflow.
 
 ### [Error Three](#Error-Three)
 
