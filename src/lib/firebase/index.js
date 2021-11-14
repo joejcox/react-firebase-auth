@@ -1,9 +1,8 @@
 import { initializeApp } from "firebase/app";
-
-export const auth = firebase.Auth();
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "login-e2aad.firebaseapp.com",
   projectId: "login-e2aad",
   storageBucket: "login-e2aad.appspot.com",
@@ -12,3 +11,7 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
+
+const auth = getAuth(firebaseApp);
+
+export default auth;

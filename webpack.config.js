@@ -56,6 +56,11 @@ module.exports = {
     extensions: ["*", ".js", ".jsx"],
     alias: {
       "react-dom": "@hot-loader/react-dom",
+      Components: path.resolve(__dirname, "src/components"),
+      Containers: path.resolve(__dirname, "src/containers"),
+      Assets: path.resolve(__dirname, "src/assets"),
+      Context: path.resolve(__dirname, "src/context"),
+      Lib: path.resolve(__dirname, "src/lib"),
     },
   },
   output: {
