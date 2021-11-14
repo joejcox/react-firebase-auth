@@ -1,12 +1,14 @@
-- Sun Nov 14 03:07:22 2021 +0000 updated package.json with script to create log of commits
-- Sun Nov 14 03:03:20 2021 +0000 Updated changelog
-- Sun Nov 14 02:59:34 2021 +0000 Installed webpack-dotenv and updated webpack config with plugins object for dotenv
-- Sun Nov 14 02:33:54 2021 +0000 Merge branch 'main' of https://github.com/joejcox/react-firebase-auth into main
-- Sun Nov 14 02:33:25 2021 +0000 Updated README with information on excluding React import
-- Sun Nov 14 02:13:22 2021 +0000 Update README.md
-- Sun Nov 14 02:05:21 2021 +0000 Update README.md
-- Sun Nov 14 01:58:57 2021 +0000 Update README.md
-- Sun Nov 14 01:27:34 2021 +0000 updated readme
-- Sun Nov 14 01:22:53 2021 +0000 updated readme
-- Sun Nov 14 01:21:36 2021 +0000 updated readme
-- Sun Nov 14 01:16:41 2021 +0000 Base project set up of React from scratch, installation of dependencies, confirmed everything is running correctly. Included README which documents everything so far
+- Implemented Firebase and created SignUpForm container
+- updated changelog script in package.json
+- updated package.json with script to create log of commits
+- Updated changelog
+- Installed webpack-dotenv and updated webpack config with plugins object for dotenv
+- Merge branch 'main' of https://github.com/joejcox/react-firebase-auth into main
+- Updated README with information on excluding React import
+- Update README.md
+- Update README.md
+- Update README.md
+- updated readme
+- updated readme
+- updated readme
+- Base project set up of React from scratch, installation of dependencies, confirmed everything is running correctly. Included README which documents everything so far
