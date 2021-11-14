@@ -72,7 +72,7 @@ The article states that 'Webpack uses the loaders to process different types of 
 
 The article has not mentioned installing post-css for CSS prefixers to be added in the output so I have taken it upon myself to do this. First I have installed the required packages using `npm install --save-dev postcss-loader postcss` as instructed on the [Webpack postcss loader page](https://webpack.js.org/loaders/postcss-loader/)
 
-It turns out I also need `npm install postcss-preset-env` which is then added as a plugin in the `postcssOptions` array within the `webpack.config.js` file. This can also be done in its own file as a module export but I think I will keep everything in one place.
+It turns out I also need `npm install postcss-preset-env` which is then added as a plugin in the `postcssOptions` array within the `webpack.config.js` file. This can also be done in its own file as a module but I think I will keep everything in one place.
 
 ## React
 
