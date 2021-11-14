@@ -3,11 +3,11 @@ import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: "login-e2aad.firebaseapp.com",
-  projectId: "login-e2aad",
-  storageBucket: "login-e2aad.appspot.com",
-  messagingSenderId: "574886525798",
-  appId: "1:574886525798:web:60e8a468abdd67cc0926a7",
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MSG_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
 };
 
 const firebaseApp = initializeApp(firebaseConfig);

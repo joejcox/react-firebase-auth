@@ -241,3 +241,16 @@ _Edit:_ The article doesn't seem to hold anything of value but I have found the 
     ]
 }
 ```
+
+## Day Two Update
+
+So I've had a lot of issues implementing Firebase. Mostly with setting the displayName of the user and rendering it on the dashboard page. I was receiving an error message each time I tried to use async/await syntax which said:
+
+```
+Uncaught ReferenceError: regeneratorRuntime is not defined in React
+```
+
+After searching around a bit, it turns out this is happening as I did not have [@babel/plugin-transform-runtime](https://babeljs.io/docs/en/babel-plugin-transform-runtime) installed.
+So the reason this plugin is required is because `Async functions` are abstraction on top of generators. While they're supported in the latest versions of Node (10+), when using Babel we need to add an extra layer that transforms generators to change ES6 in to ES5 at runtime. This is because their syntax is not backwards compatible.
+
+I also had some issues with `react-router-dom` - I hadn't realised that a [new major version was out](https://reactrouter.com/docs/en/v6/api#routing). It no longer uses things like `<Redirect />` or `<Switch />` but instead uses `useNavigation`, `<Navigation />`, and `<Routes />` instead. I have used the docs to find all the current exports.

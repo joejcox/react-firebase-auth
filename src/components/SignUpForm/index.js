@@ -1,29 +1,5 @@
-import { useState } from "react";
-import auth from "Lib/firebase";
-import { updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
-
-const SignUpForm = () => {
-  const [formData, setFormData] = useState({
-    displayName: "",
-    email: "",
-    password: "",
-  });
+const SignUpForm = ({ formData, setFormData, submit }) => {
   const { displayName, email, password } = formData;
-
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((res) =>
-        updateProfile(res.user, {
-          displayName: displayName,
-        })
-      )
-      .catch((err) => {
-        console.log("Error :(");
-      });
-
-    setFormData({ displayName: "", email: "", password: "" });
-  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,7 +7,7 @@ const SignUpForm = () => {
 
   return (
     <section className="section">
-      <form onSubmit={handleSignUp}>
+      <form onSubmit={submit}>
         <div className="field">
           <input
             className="input"

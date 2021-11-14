@@ -1,3 +1,4 @@
+- upload changelog
 - Implemented Firebase and created SignUpForm container
 - updated changelog script in package.json
 - updated package.json with script to create log of commits

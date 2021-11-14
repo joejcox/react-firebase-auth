@@ -1,19 +1,24 @@
-import { useContext } from "react";
-import { AuthContext } from "Context/AuthContext";
-import SignUpForm from "Containers/SignUpForm";
-import auth from "Lib/firebase";
-import { signOut } from "firebase/auth";
+import { Routes, Route } from "react-router-dom";
+import Home from "Containers/Home";
+import SignUp from "Containers/SignUp";
+import Dashboard from "Containers/Dashboard";
+import PrivateRoute from "Containers/PrivateRoute";
 
 const App = () => {
-  const user = useContext(AuthContext);
-
   return (
     <div className="wrapper">
-      <h1 className="title is-1">
-        Hello {user ? console.log(user.displayName) : "World"}
-      </h1>
-      <SignUpForm />
-      <button onClick={() => signOut(auth)}>Sign Out</button>
+      <Routes>
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
   );
 };

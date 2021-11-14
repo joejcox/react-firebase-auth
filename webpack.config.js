@@ -58,6 +58,7 @@ module.exports = {
       "react-dom": "@hot-loader/react-dom",
       Components: path.resolve(__dirname, "src/components"),
       Containers: path.resolve(__dirname, "src/containers"),
+      Hooks: path.resolve(__dirname, "src/hooks"),
       Assets: path.resolve(__dirname, "src/assets"),
       Context: path.resolve(__dirname, "src/context"),
       Lib: path.resolve(__dirname, "src/lib"),
@@ -65,7 +66,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/dist/",
+    publicPath: "/dist",
     filename: "bundle.js",
   },
   devServer: {
@@ -73,5 +74,6 @@ module.exports = {
     host: "localhost",
     port: 3000,
     hot: true,
+    historyApiFallback: true,
   },
 };
