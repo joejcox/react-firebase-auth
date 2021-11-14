@@ -227,3 +227,17 @@ _Edit:_ This was fixed by changing the following `webpack.config.js` property an
 ### [Importing React](#Importing-React)
 
 So with `create-react-app` you no longer need to `import React from 'react'` when creating components. I have found [this article](https://dev.to/titungdup/you-no-longer-need-to-import-react-from-react-3pbj) explaining why. I have yet to read it all but I will update once I have. I am hoping there is a way that I will be able to implement it within this project, having not used `create-react-app`
+
+_Edit:_ The article doesn't seem to hold anything of value but I have found the article [Introducing The New JSX Transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#how-to-upgrade-to-the-new-jsx-transform) on React's website. This holds the key to upgrading the project. It seems we just need to update the .babelrc file to provide a few further options to the `@babel/preset-react` plugin as follows:
+
+```
+{
+    "plugins": ["react-hot-loader/babel"],
+    "presets": [
+        ["@babel/env"],
+        ["@babel/preset-react", {
+            "runtime": "automatic"
+        }]
+    ]
+}
+```
