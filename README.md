@@ -10,7 +10,7 @@ I really wasn't sure how this would go.
 
 So first I checked the [Create a New React App](https://reactjs.org/docs/create-a-new-react-app.html) section on the [React website](https://www.reactjs.org).
 
-### Requirements
+### [Requirements](#Requirements)
 
 One thing it states that I will need is the following:
 
@@ -25,7 +25,7 @@ The main requirements area to have a package manager, a bundler and compiler. Fo
 - [Webpack](https://webpack.js.org/)
 - [Babel](https://babeljs.io/)
 
-#### [Package Manager](#)
+#### Package Manager
 
 The React documentation states that the npm version must be 5.6 or above. I chose npm since I already have the latest stable version installed.
 
@@ -39,7 +39,7 @@ I opted to use Babel as the compiler as this is the only one that I have ever us
 
 The React documentation stops here and recommends an article on Medium for [setting up a toolchain from scratch](https://medium.com/@JedaiSaboteur/creating-a-react-app-from-scratch-f3c693b84658)
 
-### The Medium Article
+### [The Medium Article](#The-Medium-Article)
 
 So to start off, once initialising npm and git, the article recommended creating a `public` and `src` folder, as we all know, the staples of the React folder structure.
 
@@ -52,7 +52,7 @@ It mentions that we should think ahead regarding git so we will set up a `.gitig
 
 The `public` folder will be used to handle the static assets (favicon, index.html etc). On top of this, I will also be creating folders within the src directory for `components`, `context` and `lib`. The `context` folder will of course hold context such as the user authentication state andThe `lib` folder will hold any libraries in use such as `Firebase`.
 
-### Configuring the compiler, Babel
+### [Configuring the compiler, Babel](#configuring-the-compiler-babel)
 
 First I have installed Babel using `npm install --save-dev @babel/core@7.16.0 @babel/cli@7.16.0 @babel/preset-env@7.9.0 @babel/preset-react@7.9.0` after looking up the latest versions.
 
@@ -60,7 +60,7 @@ The article gives some information on the packages, explaining babel-core is the
 
 Once done, I will add a `.babelrc` file which will hold an object that will tell babel which presets we'd like to use. A full list of Babel's plugins can be found [here](https://babeljs.io/docs/en/plugins/) - I may take a look at these at a later date, but for now I just want the core fundamentals in place.
 
-### Setting up Webpack
+### [Setting up Webpack](#Setting-up-Webpack)
 
 Webpack's website states that you do not need to use a configuration file when using Webpack however it looks like we will need configuration to set some rules in the development mode, the entry point (which will be the `index.js` we will create in the src folder) and the location of the dist folder to build in to.
 
@@ -84,7 +84,7 @@ I will use `ReactDOM.render` as this is the main function that tells React what 
 
 After this, we just need to create the `App.js` file to hold the `App component` which is rendered in the `index.js` file and we should be set to install any extra libraries we may want to use.
 
-### Some other dependencies I would like to use
+### [Some other dependencies I would like to use](#Some-other-dependencies-I-would-like-to-use)
 
 So I would like to think about any CSS Frameworks, libraries I'd like to use etc. I will install the following:
 
@@ -113,7 +113,7 @@ I will be using React Router Dom to set up dynamic routes in my app. It will all
 
 I don't really have an idea set in stone. I'm going to go in to this first getting `Firebase` implemented. Then I will set down a base within the `App.js` file. Once this is done I will look in to implementing `Context` to store the `user auth` data.
 
-### Things that cross my mind on set up
+### [Things that cross my mind on set up](#Things-that-cross-my-mind-on-set-up)
 
 Folder structure is one thing I like to think about but I never know what would be best. I am going to go with the usual:
 
@@ -178,13 +178,13 @@ I will also need to add some scripts to the `package.json` in order to run the d
 
 ## Issues
 
-#### Error One
+### [Error One](#error-one)
 
 So after completing all of the above, I'm running in to an error when running the start script - `SyntaxError: Cannot use import statement outside a module`
 
 So it looks like I've changed the path and webpack variables in the webpack config to import statements which can not be used outside of a module, silly me! I have updated this and hopefully things will work.
 
-#### Error Two
+### [Error Two](#Error-Two)
 
 ```
 [webpack-cli] Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
@@ -194,7 +194,7 @@ So it looks like I've changed the path and webpack variables in the webpack conf
 
 Okay so upon investigation this, it seems that the latest version of Webpack (5) does not support the property `hotOnly` within the config under the object within `devServer`. I have updated this to `hot: "only"` which should work according to stack overflow.
 
-#### Error Three
+### [Error Three](#Error-Three)
 
 ```
 [webpack-cli] Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
@@ -204,7 +204,7 @@ Okay so upon investigation this, it seems that the latest version of Webpack (5)
 
 I was unable to find anything, I will come back to this. I have updated the `publicPath` key to `host` as this is an accepted property. It has worked for now
 
-#### Error Four
+### [Error Four](#Error-Four)
 
 ```
 [webpack-cli] Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
@@ -218,12 +218,12 @@ Upon searching around a bit I have found [this thread](https://github.com/webpac
 
 This error was resolved with the `static` option mentioned above.
 
-#### Final Issue
+## Final Issue
 
 The only issue I am having now is that I can not see changes when I save files, I need to reload manually. The react-hot-loader was installed for this reason, so I believe there is something wrong here.
 
 _Edit:_ This was fixed by changing the following `webpack.config.js` property and value: `devServer.hot: "only"` to `devServer.hot: true`
 
-### Importing React
+### [Importing React](#Importing-React)
 
 So with `create-react-app` you no longer need to `import React from 'react'` when creating components. I have found [this article](https://dev.to/titungdup/you-no-longer-need-to-import-react-from-react-3pbj) explaining why. I have yet to read it all but I will update once I have. I am hoping there is a way that I will be able to implement it within this project, having not used `create-react-app`
