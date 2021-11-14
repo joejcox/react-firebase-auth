@@ -50,7 +50,7 @@ It mentions that we should think ahead regarding git so we will set up a `.gitig
 
 #### Folder Structure
 
-The `public` folder will be used to handle the static assets (favicon, index.html etc). On top of this, I will also be creating folders within the src directory for `components`, `context` and `lib`. The `context` folder will of course hold context such as the user authentication state andThe `lib` folder will hold any libraries in use such as `Firebase`.
+The `public` folder will be used to handle the static assets (favicon, index.html etc). On top of this, I will also be creating folders within the src directory for `components`, `context` and `lib`. The `context` folder will of course hold context such as the user authentication state andThe `lib` folder will hold any libraries or development kits in use such as `Firebase`.
 
 ### [Configuring the compiler, Babel](#configuring-the-compiler-babel)
 
