@@ -1,46 +1,96 @@
-import { useState, createContext } from "react";
-import auth from "Lib/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import SignUpForm from "Components/SignUpForm";
-import useAuth from "Hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react"
+import SignUpForm from "Components/SignUpForm"
+import useAuth from "Hooks/useAuth"
+import { useNavigate } from "react-router-dom"
 
 const SignUp = () => {
-  const navigate = useNavigate();
-  const user = useAuth();
-  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate()
+  const [submitting, setSubmitting] = useState(false)
+  const { currentUser, signUp } = useAuth()
+  const [errorMessage, setErrorMessage] = useState("")
+  const [errors, setErrors] = useState({
+    email: {
+      blank: null,
+      invalid: null,
+    },
+    password: {
+      blank: null,
+      match: null,
+      invalid: null,
+    },
+  })
   const [formData, setFormData] = useState({
-    displayName: "",
     email: "",
     password: "",
-  });
-  const { email, password, displayName } = formData;
+    passwordDuplicate: "",
+  })
+  const { email, password, passwordDuplicate } = formData
 
-  const handleSignUp = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (submitting) return false
 
-    try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      await updateProfile(response.user, {
-        displayName: displayName,
-        photoURL: "",
-      });
+    if (currentUser) {
+      navigate("/dashboard")
+    }
+  })
 
-      return navigate("/dashboard");
-    } catch (error) {
-      setErrorMessage(error);
+  const checkIsBlank = (input, input2) => {
+    // check if the passed input is blank and return true or false
+    if (input2) {
+      return input.length <= 0 && input2.length <= 0
+    }
+    return input.length <= 0
+  }
+
+  const checkIsEmail = (email) => {
+    const regexp =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return regexp.test(String(email).toLowerCase())
+  }
+
+  const checkPasswordsMatch = (password, passwordDuplicate) => {
+    return password === passwordDuplicate
+  }
+
+  const checkPasswordsValid = (password) => {
+    return password.length >= 6
+  }
+
+  const handleSignUp = (e) => {
+    e.preventDefault()
+
+    setSubmitting(true)
+
+    const isEmailBlank = checkIsBlank(email)
+    const emailExists = checkIsEmail(email)
+    const isPasswordBlank = checkIsBlank(password, passwordDuplicate)
+    const passwordsMatch = checkPasswordsMatch(password, passwordDuplicate)
+    const passwordsValid = checkPasswordsValid(password)
+
+    setErrors({
+      email: {
+        blank: isEmailBlank && "Email must not be blank",
+        invalid: !emailExists && "Invalid email",
+      },
+      password: {
+        blank: isPasswordBlank && "Password fields must not be blank",
+        match: !passwordsMatch && "Passwords do not match",
+        invalid:
+          !passwordsValid && "Password must contain 6 or more characters",
+      },
+    })
+
+    if (!passwordsMatch) {
+      return setSubmitting(false)
     }
 
-    return setFormData({ displayName: "", email: "", password: "" });
-  };
-
-  if (errorMessage) {
-    console.log(errorMessage);
-    return <h1>Error...please check the console</h1>;
+    signUp(email, password)
+      .catch((error) => {
+        console.log(error)
+      })
+      .finally(() => {
+        setSubmitting(false)
+      })
   }
 
   return (
@@ -50,9 +100,11 @@ const SignUp = () => {
         formData={formData}
         setFormData={setFormData}
         submit={handleSignUp}
+        submitting={submitting}
+        errors={errors}
       />
     </>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

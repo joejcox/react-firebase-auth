@@ -4,11 +4,11 @@ import { useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
-  const user = useAuth();
+  const { currentUser } = useAuth();
 
   useEffect(() => {
-    user && navigate("/dashboard");
-  }, [user]);
+    currentUser && navigate("/dashboard");
+  }, [currentUser]);
   return (
     <>
       <h1>Home</h1>

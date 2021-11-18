@@ -1,16 +1,12 @@
-import auth from "Lib/firebase";
 import useAuth from "Hooks/useAuth";
-import { signOut } from "firebase/auth";
 
 const Dashboard = () => {
-  const user = useAuth();
+  const { currentUser, logout } = useAuth();
 
   return (
     <>
-      <h1 className="title is-1">Welcome back {user?.displayName}</h1>
-      <button
-        className="button is-primary is-large"
-        onClick={() => signOut(auth)}>
+      <h1 className="title is-1">Welcome back {currentUser.email}</h1>
+      <button className="button is-primary is-large" onClick={() => logout()}>
         Sign Out
       </button>
     </>
