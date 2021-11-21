@@ -1,17 +1,26 @@
-import { useForm } from "react-hook-form"
+import { useState } from "react"
+import { useForm, useFormState } from "react-hook-form"
 // import { ErrorMessage } from "@hookform/error-message"
 import useAuth from "Hooks/useAuth"
 
 const SignUpForm = () => {
+  const [userExists, setUserExists] = useState(null)
   const { signUp } = useAuth()
   const {
     register,
     handleSubmit,
     getValues,
+    control,
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => signUp(data.email, data.password)
+  const onSubmit = (data) => {
+    signUp(data.email, data.password)
+      .then((response) => console.log(response))
+      .catch((error) => setUserExists(error.code))
+  }
+
+  const { isSubmitting } = useFormState({ control })
 
   return (
     <form
@@ -19,6 +28,11 @@ const SignUpForm = () => {
       onSubmit={(e) => e.preventDefault()}
       autoComplete="off"
     >
+      {userExists && (
+        <p className="form-top-error has-text-danger">
+          User already exists, please use another email
+        </p>
+      )}
       <div className="field">
         <input
           type="text"
@@ -87,8 +101,9 @@ const SignUpForm = () => {
       <input
         type="submit"
         className="button is-info"
-        value="Sign Up"
+        value={isSubmitting ? "Signing up..." : "Sign up"}
         onClick={handleSubmit(onSubmit)}
+        disabled={isSubmitting}
       />
     </form>
   )
