@@ -32,9 +32,7 @@ const AuthContextProvider = ({ children }) => {
   }
 
   const signIn = (email, password) => {
-    validateEmail(email)
-    validatePasswords(password)
-    return signInWithEmailAndPassword(email, password)
+    return signInWithEmailAndPassword(auth, email, password)
   }
 
   const logout = async () => {

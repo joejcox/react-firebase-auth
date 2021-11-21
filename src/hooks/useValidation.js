@@ -1,24 +1,78 @@
 import { useState } from "react"
 
-const useValidation = () => {
+const useValidation = (rules) => {
+  const [data, setData] = useState(rules?.initialValue || {})
+
+  /*
+
+    options will be the paramaters we pass through to the hook. It might look something like this:
+
+    const { handleSubmit, handleChange } = useValidation({
+      email: {
+        pattern: {
+          value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        }
+      },
+      password: {
+        required: {
+          value: true,
+          message: 'This field is required',
+        },
+        custom: {
+          isValid: (value) => value.length > 6,
+          message: 'The password needs to be at least 6 characters',
+        },
+      },
+      passwordDuplicate: {
+        required: {
+          value: true,
+          message: 'This field is required',
+        },
+        custom: {
+          isValid: (value) => value === this.password?.required?.value
+        }
+      }                                           
+      initialValue: { // we could actually just leave this out and then in the inputs put value={data.value || ''}
+        email: "",
+        password: "",
+        passwordDuplicate: ""
+      }
+    })
+
+  */
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    passwordDuplicate: "",
+  })
+
   const [errors, setErrors] = useState({
     email: {
-      blank: null,
-      invalid: null,
+      isBlank: null,
+      isInvalid: null,
     },
     password: {
-      blank: null,
-      match: null,
-      invalid: null,
+      matches: null,
+      isBlank,
+      isInvalid: null,
+    },
+    passwordDuplicate: {
+      matches: null,
+      isBlank: null,
+      isInvalid: null,
     },
   })
 
-  const checkIsBlank = (input, input2) => {
-    // check if the passed input is blank and return true or false
-    if (input2) {
-      return input.length <= 0 && input2.length <= 0
-    }
-    return input.length <= 0
+  const checkIsBlank = (email, password, passwordDuplicate) => {
+    if ((email && password && passwordDuplicate) !== blank) return
+    let newErrors = errors
+
+    if (email === "") newErrors.email.isBlank = true
+    if (password === "") newErrors.password.isBlank = true
+    if (passwordDuplicate === "") newErrors.passwordDuplicate.isBlank = true
+
+    return setErrors({ ...newErrors })
   }
 
   const checkIsEmail = (email) => {
@@ -31,28 +85,30 @@ const useValidation = () => {
     return password === passwordDuplicate
   }
 
-  const checkPasswordsValid = (password) => {
+  const checkPasswordValid = (password) => {
     return password.length >= 6
   }
 
-  setErrors({
-    email: {
-      blank: isEmailBlank && "Email must not be blank",
-      invalid: !emailExists && "Invalid email",
-    },
-    password: {
-      blank: isPasswordBlank && "Password fields must not be blank",
-      match: !passwordsMatch && "Passwords do not match",
-      invalid: !passwordsValid && "Password must contain 6 or more characters",
-    },
-  })
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleSubmit = (email, password, passwordDuplicate) => {
+    e.preventDefault()
+  }
 
   return {
     errors,
+    formData,
     checkIsBlank,
     checkIsEmail,
-    checkPasswordsValid,
+    checkPasswordValid,
     checkPasswordsMatch,
+    handleChange,
+    handleSubmit,
   }
 }
 

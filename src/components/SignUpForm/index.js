@@ -1,83 +1,95 @@
-import styles from "./styles.module.css"
+import { useForm } from "react-hook-form"
+// import { ErrorMessage } from "@hookform/error-message"
+import useAuth from "Hooks/useAuth"
 
-const SignUpForm = ({ formData, setFormData, submit, submitting, errors }) => {
-  const { email, password, passwordDuplicate } = formData
+const SignUpForm = () => {
+  const { signUp } = useAuth()
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm()
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const onSubmit = (data) => signUp(data.email, data.password)
 
   return (
-    <form className={styles.signupForm} onSubmit={submit}>
+    <form
+      className="signupForm"
+      onSubmit={(e) => e.preventDefault()}
+      autoComplete="off"
+    >
       <div className="field">
         <input
-          className={`input ${styles.formInput}`}
           type="text"
-          name="email"
+          className="input formInput"
           placeholder="Email"
-          onChange={handleChange}
-          value={email}
+          {...register("email", {
+            required: {
+              value: true,
+              message: "Field can not be empty",
+            },
+            pattern: {
+              value:
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              message: "Invalid email",
+            },
+          })}
         />
-        <div className="errors">
-          {errors.email.invalid && (
-            <span className="is-block has-text-danger is-size-7">
-              {errors.email.invalid}
-            </span>
-          )}
-          {errors.email.blank && (
-            <span className="is-block has-text-danger is-size-7">
-              {errors.email.blank}
-            </span>
-          )}
-        </div>
+        {errors.email && (
+          <span className="is-block has-text-danger is-size-7">
+            {errors.email.message}
+          </span>
+        )}
       </div>
       <div className="field">
         <input
-          className={`input ${styles.formInput}`}
           type="password"
+          className="input formInput"
           name="password"
           placeholder="Password"
-          onChange={handleChange}
-          value={password}
+          {...register("password", {
+            required: "You must specify a password",
+            minLength: {
+              value: 6,
+              message: "Password must have at least 6 characters",
+            },
+          })}
         />
+        {errors.password && (
+          <span className="is-block has-text-danger is-size-7">
+            {errors.password.message}
+          </span>
+        )}
       </div>
       <div className="field">
         <input
-          className={`input ${styles.formInput}`}
           type="password"
           name="passwordDuplicate"
-          placeholder="Re-type password"
-          onChange={handleChange}
-          value={passwordDuplicate}
+          className="input formInput"
+          placeholder="Repeat password"
+          {...register("passwordDuplicate", {
+            required: "You must confirm your password",
+            minLength: {
+              value: 6,
+              message: "Password must have at least 6 characters",
+            },
+            validate: (value) =>
+              value === getValues("password") || "The passwords do not match",
+          })}
         />
-        <div className="errors">
-          {errors.password.blank && (
-            <span className="is-block has-text-danger is-size-7">
-              {errors.password.blank}
-            </span>
-          )}
-          {errors.password.match && (
-            <span className="is-block has-text-danger is-size-7">
-              {errors.password.match}
-            </span>
-          )}
-          {errors.password.invalid && (
-            <span className="is-block has-text-danger is-size-7">
-              {errors.password.invalid}
-            </span>
-          )}
-        </div>
+        {errors.passwordDuplicate && (
+          <span className="is-block has-text-danger is-size-7">
+            {errors.passwordDuplicate.message}
+          </span>
+        )}
       </div>
-      {submitting ? (
-        <input
-          type="submit"
-          value="Signing in..."
-          className="button is-info"
-          disabled
-        />
-      ) : (
-        <input type="submit" value="Sign Up" className="button is-info" />
-      )}
+      <input
+        type="submit"
+        className="button is-info"
+        value="Sign Up"
+        onClick={handleSubmit(onSubmit)}
+      />
     </form>
   )
 }

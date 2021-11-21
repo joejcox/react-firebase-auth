@@ -1,3 +1,6 @@
+- updated routes, added an unfinished sign in page. Set a route outlet for the account pages
+- added form validation and redirect routes based on user authentication
+- Fully implemented Firebase sign in and context auth. Updated react-router-dom imports to correspond with v6 exports. Created private routing for unauthorised access. Created an auth provider wrapper component
 - upload changelog
 - Implemented Firebase and created SignUpForm container
 - updated changelog script in package.json
