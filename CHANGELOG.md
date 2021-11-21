@@ -1,3 +1,4 @@
+- Added firebase error codes to forms for invalid user, incorrect password and user exists
 - removed validate hook
 - implemented React hook form and updated sign up page. Form logic is now fully in the form components. Added sign in page/form
 - updated routes, added an unfinished sign in page. Set a route outlet for the account pages
