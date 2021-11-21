@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import SignUpForm from "Components/SignUpForm"
 import useAuth from "Hooks/useAuth"
 import { useNavigate } from "react-router-dom"
+import styles from "./styles.module.css"
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -30,7 +31,7 @@ const SignUp = () => {
     if (submitting) return false
 
     if (currentUser) {
-      navigate("/dashboard")
+      navigate("/account/dashboard")
     }
   })
 
@@ -94,8 +95,8 @@ const SignUp = () => {
   }
 
   return (
-    <>
-      <h1 className="title is-1">Welcome! Sign up below</h1>
+    <div className="form">
+      <h1 className="title is-1">Sign up</h1>
       <SignUpForm
         formData={formData}
         setFormData={setFormData}
@@ -103,7 +104,7 @@ const SignUp = () => {
         submitting={submitting}
         errors={errors}
       />
-    </>
+    </div>
   )
 }
 

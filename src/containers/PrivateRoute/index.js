@@ -1,9 +1,9 @@
-import { Navigate } from "react-router-dom";
-import useAuth from "Hooks/useAuth";
+import { Navigate } from "react-router-dom"
+import useAuth from "Hooks/useAuth"
 
 const PrivateRoute = ({ children }) => {
-  const { currentUser } = useAuth();
-  return currentUser ? children : <Navigate to="/sign-up" />;
-};
+  const { currentUser } = useAuth()
+  return currentUser ? children : <Navigate to="/account/sign-in" />
+}
 
-export default PrivateRoute;
+export default PrivateRoute

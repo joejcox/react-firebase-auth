@@ -1,19 +1,35 @@
-import useAuth from "Hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import useAuth from "Hooks/useAuth"
+import { Link } from "react-router-dom"
 
 const Home = () => {
-  const navigate = useNavigate();
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuth()
 
-  useEffect(() => {
-    currentUser && navigate("/dashboard");
-  }, [currentUser]);
+  const AuthButton = () =>
+    currentUser ? (
+      <Link className="button is-info" to="/account/dashboard">
+        Go to dashboard
+      </Link>
+    ) : (
+      <>
+        <Link className="button is-info" to="/account/sign-up">
+          Sign Up
+        </Link>
+        <Link className="button is-info is-outline" to="/account/sign-in">
+          Sign In
+        </Link>
+      </>
+    )
+
   return (
-    <>
-      <h1>Home</h1>
-    </>
-  );
-};
+    <div className="section">
+      <div className="container">
+        <h1>Home</h1>
+        <section className="section">
+          <AuthButton />
+        </section>
+      </div>
+    </div>
+  )
+}
 
-export default Home;
+export default Home

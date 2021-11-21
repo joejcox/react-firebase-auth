@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+.has-text-info {
+    color: hsl(150, 50%, 40%);
+}
+
+.is-info,
+.button.is-info {
+    background: hsl(150, 50%, 40%);
+}
+
+.button.is-info:hover {
+    background: hsl(150, 50%, 30%);
+}
+
+.is-info-dark {
+    background: hsl(150, 50%, 15%);
+}
+
+.form-page-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.form {
+    width: 100%;
+    max-width: 35rem;
+    background: white;
+    padding-top: 2rem;
+    border-radius: 0.5rem;
+}
+
+.form h1 {
+    padding: 0 3rem;
+}
