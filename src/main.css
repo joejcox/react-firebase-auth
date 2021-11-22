@@ -34,14 +34,17 @@ html {
     background: transparent;
     border: 2px solid hsl(150, 50%, 40%);
     color: hsl(150, 50%, 40%);
-    margin-left: 1rem;
+}
+
+.ml-space {
+    margin-left: 0.5rem;
 }
 
 .form-page-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 90vh;
 }
 
 .form {
@@ -75,4 +78,27 @@ html {
 .form-top-error {
     margin: 0;
     margin-bottom: 1rem;
+}
+
+.site_header {
+    /* position: fixed; */
+    width: 100%;
+    background: hsl(0, 100%, 100%);
+    padding: 0.5rem 0;
+}
+
+.site_header .navbar {
+    background: transparent;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    line-height: 1;
+    color: hsl(150, 50%, 30%);
 }

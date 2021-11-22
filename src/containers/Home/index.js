@@ -1,35 +1,9 @@
-import useAuth from "Hooks/useAuth"
-import { Link } from "react-router-dom"
-
-const Home = () => {
-  const { currentUser } = useAuth()
-
-  const AuthButton = () =>
-    currentUser ? (
-      <Link className="button is-info" to="/account/dashboard">
-        Go to dashboard
-      </Link>
-    ) : (
-      <>
-        <Link className="button is-info" to="/account/sign-up">
-          Sign Up
-        </Link>
-        <Link className="button is-info is-outline" to="/account/sign-in">
-          Sign In
-        </Link>
-      </>
-    )
-
-  return (
-    <div className="section">
-      <div className="container">
-        <h1>Home</h1>
-        <section className="section">
-          <AuthButton />
-        </section>
-      </div>
+const Home = () => (
+  <section className="hero is-medium is-info-dark">
+    <div className="hero-body">
+      <h1 className="title is-2 has-text-white">Homepage</h1>
     </div>
-  )
-}
+  </section>
+)
 
 export default Home
