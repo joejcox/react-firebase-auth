@@ -6,7 +6,7 @@ const Header = () => (
     <div className="navbar">
       <div className="navbar-start">
         <Link to="/" className="logo">
-          LOGO
+          BLOCK.
         </Link>
       </div>
       <Navbar />

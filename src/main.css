@@ -9,6 +9,11 @@ html {
     height: 100%;
 }
 
+.button {
+    border-radius: 50px;
+    padding: 0 1.5rem;
+}
+
 .has-text-info {
     color: hsl(150, 50%, 40%);
 }
@@ -57,9 +62,10 @@ html {
 }
 
 .formInput {
+    transition: 0.4s ease;
     border-radius: 0;
     border: none;
-    border-bottom: 1px solid hsl(150, 50%, 40%);
+    border-bottom: 1px solid hsl(150, 0%, 90%);
     box-shadow: none;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -101,4 +107,68 @@ html {
     font-weight: bolder;
     line-height: 1;
     color: hsl(150, 50%, 30%);
+}
+
+.profile-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-header .container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.profile-background {
+    background: #f7f7f7;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.profile-background img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-image {
+    background: hsl(0, 0%, 80%);
+    /* border: 2px solid white; */
+    border-radius: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2rem;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.profile-image img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-details .title {
+    line-height: 1;
+    padding: 0;
+    margin-bottom: 0.5rem;
+}
+
+.has-backdrop {
+    display: inline-block;
+    background: hsla(0, 0%, 0%, 0.8);
+    padding: 0.5rem;
+    color: white;
+    max-width: 400px;
+}
+
+.title.has-backdrop {
+    padding: 0.2rem 0.5rem 0.5rem;
 }

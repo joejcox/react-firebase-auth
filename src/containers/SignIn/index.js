@@ -9,7 +9,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (currentUser) {
-      navigate("/account/dashboard")
+      navigate("/dashboard")
     }
   })
 

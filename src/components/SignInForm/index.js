@@ -3,40 +3,40 @@ import { useForm, useFormState } from "react-hook-form"
 import useAuth from "Hooks/useAuth"
 
 const SignInForm = () => {
-  const [firebaseError, setFirebaseError] = useState({
-    code: null,
-    message: null,
-  })
-  const [userError, setUserError] = useState(null)
+  const [firebaseError, setFirebaseError] = useState(null)
   const { signIn } = useAuth()
   const {
     register,
     handleSubmit,
+    resetField,
     control,
     formState: { errors },
   } = useForm()
-  const onSubmit = (data) => {
-    signIn(data.email, data.password)
-      .then((response) => console.log(response))
-      .catch((error) => {
-        setFirebaseError({
-          code: error.code,
-          message: error.message,
-        })
-      })
-  }
 
   const { isSubmitting } = useFormState({ control })
 
-  const FirebaseError = () => {
-    if (!firebaseError.code) return
-    if (firebaseError.code === "auth/wrong-password") {
-      return "Incorrect password, please try again"
-    } else if (firebaseError.code === "auth/user-not-found") {
-      return "User does not exist, please try again"
-    } else {
-      return firebaseError.message
-    }
+  const onSubmit = async (data) => {
+    await signIn(data.email, data.password)
+      .then((response) => console.log(response))
+      .catch((error) => {
+        let message = null
+
+        if (error.code === "auth/too-many-requests") {
+          message =
+            "Too many unsuccessful attempts, please reset password or try again later"
+        }
+
+        if (error.code === "auth/wrong-password") {
+          message = "Incorrect password, please try again"
+        }
+
+        if (error.code === "auth/user-not-found") {
+          message = "User does not exist, please try again"
+        }
+
+        resetField("password")
+        setFirebaseError(message)
+      })
   }
 
   return (
@@ -45,11 +45,10 @@ const SignInForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       autoComplete="off"
     >
-      {firebaseError.code && (
-        <p className="form-top-error has-text-danger">
-          <FirebaseError />
-        </p>
+      {firebaseError && (
+        <p className="form-top-error has-text-danger">{firebaseError}</p>
       )}
+
       <div className="field">
         <input
           type="text"

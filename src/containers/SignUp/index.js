@@ -9,7 +9,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (currentUser) {
-      navigate("/account/dashboard")
+      navigate("/dashboard")
     }
   })
 

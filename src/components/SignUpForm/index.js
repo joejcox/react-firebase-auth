@@ -1,11 +1,10 @@
 import { useState } from "react"
 import { useForm, useFormState } from "react-hook-form"
-// import { ErrorMessage } from "@hookform/error-message"
 import useAuth from "Hooks/useAuth"
 
 const SignUpForm = () => {
   const [userExists, setUserExists] = useState(null)
-  const { signUp } = useAuth()
+  const { signUp, error } = useAuth()
   const {
     register,
     handleSubmit,
@@ -14,10 +13,8 @@ const SignUpForm = () => {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => {
-    signUp(data.email, data.password)
-      .then((response) => console.log(response))
-      .catch((error) => setUserExists(error.code))
+  const onSubmit = async (data) => {
+    signUp(data.email, data.password, data.username)
   }
 
   const { isSubmitting } = useFormState({ control })
@@ -29,10 +26,40 @@ const SignUpForm = () => {
       autoComplete="off"
     >
       {userExists && (
-        <p className="form-top-error has-text-danger">
-          User already exists, please use another email
-        </p>
+        <p className="form-top-error has-text-danger">{userExists}</p>
       )}
+      {error && <p className="form-top-error has-text-danger">{error}</p>}
+      <div className="field">
+        <input
+          type="text"
+          className="input formInput"
+          placeholder="Username"
+          {...register("username", {
+            required: {
+              value: true,
+              message: "Field can not be empty",
+            },
+            minLength: {
+              value: 3,
+              message: "Username must be 3 or more characters",
+            },
+            maxLength: {
+              value: 30,
+              message: "Username can not be longer than 30 characters",
+            },
+            pattern: {
+              value: /^[a-zA-Z0-9]+$/,
+              message:
+                "Username must only contain letters and numbers (no spaces)",
+            },
+          })}
+        />
+        {errors.username && (
+          <span className="is-block has-text-danger is-size-7">
+            {errors.username.message}
+          </span>
+        )}
+      </div>
       <div className="field">
         <input
           type="text"
