@@ -32,7 +32,6 @@ const AuthContextProvider = ({ children }) => {
           const querySnapshot = await getDocs(collection(db, "users"))
           querySnapshot.forEach((doc) => {
             if (user.uid === doc.data().uid) {
-              console.log("Matched")
               setDisplayName(doc.id)
             }
           })

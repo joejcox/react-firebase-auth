@@ -8,6 +8,9 @@ import Dashboard from "Containers/Dashboard"
 import Profile from "Containers/Profile"
 import PrivateRoute from "Containers/PrivateRoute"
 import { BrowserRouter as Router } from "react-router-dom"
+import Modal from "react-modal"
+
+Modal.setAppElement("#root")
 
 const App = () => {
   return (

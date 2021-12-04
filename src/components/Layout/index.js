@@ -6,10 +6,12 @@ const Layout = ({ children }) => {
   return (
     <AuthContextProvider>
       <UserContextProvider>
-        <Header />
-        <main className="main" role="main">
-          {children}
-        </main>
+        <div className="wrapper">
+          <Header />
+          <main className="main" role="main">
+            {children}
+          </main>
+        </div>
       </UserContextProvider>
     </AuthContextProvider>
   )

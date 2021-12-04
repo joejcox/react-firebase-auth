@@ -6,7 +6,9 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { db } from "Lib/firebase"
 import { collection, getDocs } from "firebase/firestore"
-import avatar from "../../assets/images/avatar_placeholder.png"
+import UserPosts from "Components/Posts/UserPosts"
+import ProfileSkeleton from "Components/Skeletons/ProfileSkeleton"
+import ProfileHeader from "Containers/Profile/ProfileHeader"
 
 const Profile = () => {
   const { user } = useParams()
@@ -24,12 +26,10 @@ const Profile = () => {
     }
 
     getUser()
-  }, [])
-
-  console.log(data)
+  }, [user])
 
   if (loading) {
-    return <h1>Loading...</h1>
+    return <ProfileSkeleton />
   }
 
   if (!data.data) {
@@ -37,34 +37,14 @@ const Profile = () => {
   }
 
   return (
-    <section className="section profile-header">
-      <div className="container">
-        <div className="profile-image">
-          <img
-            src={data.data.avatar || avatar}
-            alt={`${data.username} profile avatar`}
-          />
+    <div className="profile">
+      <ProfileHeader data={data} loading={loading} />
+      <section className="section posts">
+        <div className="container">
+          <UserPosts author={data.username} />
         </div>
-        <div className="profile-details">
-          <h1 className="title is-3 has-backdrop">{data.username}</h1>
-          {data.data.bio && (
-            <>
-              <br />
-              <h2 className="subtitle is-6 has-backdrop">{data.data.bio}</h2>
-            </>
-          )}
-        </div>
-      </div>
-
-      <div className="profile-background">
-        {data.data.profileBg && (
-          <img
-            src={data.data.profileBg}
-            alt={`${data.username}'s profile background image'`}
-          />
-        )}
-      </div>
-    </section>
+      </section>
+    </div>
   )
 }
 

@@ -1,5 +1,5 @@
-const path = require("path");
-const Dotenv = require("dotenv-webpack");
+const path = require("path")
+const Dotenv = require("dotenv-webpack")
 // const webpack = require("webpack");
 
 module.exports = {
@@ -59,7 +59,7 @@ module.exports = {
       Components: path.resolve(__dirname, "src/components"),
       Containers: path.resolve(__dirname, "src/containers"),
       Hooks: path.resolve(__dirname, "src/hooks"),
-      Assets: path.resolve(__dirname, "src/assets"),
+      Images: path.resolve(__dirname, "src/assets/images"),
       Context: path.resolve(__dirname, "src/context"),
       Lib: path.resolve(__dirname, "src/lib"),
     },
@@ -76,4 +76,4 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
   },
-};
+}

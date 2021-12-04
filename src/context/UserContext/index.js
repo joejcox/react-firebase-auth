@@ -10,11 +10,13 @@ export const UserContext = createContext({
   userData: Object,
   username: String,
   uid: String,
+  avatar: String,
 })
 
 const UserContextProvider = ({ children }) => {
   const [userData, setUserData] = useState(null)
   const [username, setUsername] = useState(null)
+  const [avatar, setAvatar] = useState(null)
   const [uid, setUid] = useState(null)
   const { currentUser } = useAuth()
 
@@ -26,6 +28,7 @@ const UserContextProvider = ({ children }) => {
         if (currentUser.uid === doc.data().uid) {
           setUserData(doc.data())
           setUsername(doc.id)
+          setAvatar(doc.data().avatar)
           setUid(doc.data().uid)
         }
       })
@@ -38,6 +41,7 @@ const UserContextProvider = ({ children }) => {
     userData,
     username,
     uid,
+    avatar,
   }
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
